@@ -16122,7 +16122,7 @@ void WSManager::processMailUnlock(const std::string& data) {
 void WSManager::processMissionPlace(const std::string& data) {
 }
 
-void WSManager::processCustomRedPoint(const std::string& data) {
+void W SManager::processCustomRedPoint(const std::string& data) {
     auto a = 1;
 
     rapidjson::Document jsonDoc;
@@ -16132,8 +16132,8 @@ void WSManager::processCustomRedPoint(const std::string& data) {
     int id = 0;
     bool isUnread = false;
     auto itr = jsonDoc.MemberBegin();
-    if (itr != jsonDoc.MemberEnd()){
-        auto key = itr->name.GetString();
+      if (itr != jsonDoc.MemberEnd()){
+          auto key = itr->name.GetString();
         isUnread = itr->value.GetInt() == 0 ? true : false; //0 未读
         std::vector<std::string> strList = splitStringByDelimiter(key, ":");
         type = atoi(strList[0].c_str());
@@ -16157,7 +16157,7 @@ void WSManager::processCustomRedPoint(const std::string& data) {
     }
 }
 
-void WSManager::processGetTreasureInfo(const std::string& data) {
+void  WSManager::processGetTreasureInfo(const std::string& data) {
     Document jsonDoc;
     jsonDoc.ParseInsitu((char *) data.c_str());
 
@@ -16214,7 +16214,7 @@ void WSManager::processTpInfo(const std::string& data) {
 
 void WSManager::processDialogueApprove(const std::string& data) {
     Document jsonDoc;
-    jsonDoc.ParseInsitu((char *) data.c_str());
+     jsonDoc.ParseInsitu((char *) data.c_str());
 
     auto npclist = jsonDoc["npcApprove"].GetObject();
     auto cardlist = jsonDoc["cardApprove"].GetObject();
@@ -16226,15 +16226,15 @@ void WSManager::processDialogueApprove(const std::string& data) {
 
         if (npcid != 0 && npcid != -1){
             auto npc = MainGame::getInstance()->getNpcById(npcid);
-            npc->addFavor(val);
+ sa           npc->addFavor(val);
         }
-
-        sprintf(buf, u8"好感度+%d", val);
+d
+        sprintf(buf, u8"好感度+%dsadas", val);
         MsgMgr::getInstance()->showMsg(buf, Color4B(255, 64, 64, 255), Color4B(0, 0, 0, 255), false);
     }
 
     for (auto iter = cardlist.begin(); iter != cardlist.end(); iter++){
-        //int cardid = atoi(((*iter).name).GetString());
+        //int cardid = atoi(((asd*iter).name).GetString());
         //int val = ((*iter).value).GetInt();
         //
         //if (cardid != 0 && cardid != -1)
@@ -16273,19 +16273,19 @@ void WSManager::processCreateMineData(const std::string& data) {
 
         map->setUnLockTaskId(lockTaskId);
         map->setIsLockMinePortal(isLockMinePortal);
-        if (map == nullptr) return;
-        CCASSERT(map != nullptr, "Map not available initialization");
-        map->clearMineData(); //更新前先clear旧的
-        GetLightController()->getLightStateList(mapId); //更新本地图的灯光
+    sd    if (map == nullptr) return;
+         CCASSERT(map != nullptr, "Map not available initialization");
+         map->clearMineData(); //更新前先clear旧的
+         GetLightController()->getLightStateList(mapId); //更新本地图的灯光
 
-        map->setMinePortalPos(x, y);
+         map->setMinePortalPos(x, y);
         MINEMAPBLOCK* blocks = (MINEMAPBLOCK *) malloc(dataSize);
-        memcpy(blocks, decodeData.data(), dataSize);
+         memcpy(blocks, decodeData.data(), dataSize);
 
 
-        map->setMineMapBlock(blocks);
-        map->refreshMine();
+         map->setMineMapBlock(blocks);
+         map->refreshMine();
 
-        CCLOG("*******************portalInfo: mapId: %d, x: %d, y: %d", mapId, x, y);
+         CCLOG("*******************portalInfo: mapId: %d, x: %d, y: %d", mapId, x, y);
     }
 }
